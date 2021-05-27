@@ -4,8 +4,15 @@
 // But on the frontEnd(React-side) is easier to use this syntax
 // import express from 'express';
 const express = require('express');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
 const app = express(); // The router will be associated with this app
 
+
+// Create a new instance of of google strategy
+// Inside the constructor tells how to autheticate user inside our application
+passport.use(new GoogleStrategy());
 
 // app.get = Get info
 // app.post = Send info
@@ -19,9 +26,8 @@ const app = express(); // The router will be associated with this app
 // req = Object representing the incoming request
 // res = Object representing the outgoing response
 // res.send({hi:'there'}) = immediately send some JSON back to who ever made this request
-app.get('/', (req, res) =>{
-    res.send({bye: 'buddy'});
-});
+
+
 
 // Environment variables
 // The line below says to look the environment e see if they declared a port for us to use.
