@@ -6,7 +6,16 @@
 // But on the frontEnd(React-side) is easier to use this syntax
 // import express from 'express';
 const express = require('express');
+const mongoose = require('mongoose')
+const keys = require('./config/keys')
 require('./services/passport');
+
+// mongoose.connect(keys.mongoURI);
+mongoose.connect(keys.mongoURI, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+  });
 
 const app = express(); // The router will be associated with this app
 
@@ -20,6 +29,7 @@ require('./routes/authRoutes')(app);
 // app.put = Update all the properties of something
 // app.delete = Delete something
 // app.patch = Update one or two properties of something
+
 
 // app = express app to register this route handler with
 // get = watch for incoming requests with this method
