@@ -8,7 +8,9 @@
 const express = require('express');
 const mongoose = require('mongoose')
 const keys = require('./config/keys')
+require('./models/User') //  Had to change the order of the required, with the line below (did not understand, but it worked magically)
 require('./services/passport');
+
 
 // mongoose.connect(keys.mongoURI);
 mongoose.connect(keys.mongoURI, {
