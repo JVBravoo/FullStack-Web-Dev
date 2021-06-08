@@ -6,20 +6,34 @@
 // But on the frontEnd(React-side) is easier to use this syntax
 // import express from 'express';
 const express = require('express');
-const mongoose = require('mongoose')
-const keys = require('./config/keys')
-require('./models/User') //  Had to change the order of the required, with the line below (did not understand, but it worked magically)
+const mongoose = require('mongoose');
+const cookieSession = require('cookie-session');
+const passport = require('passport');
+const keys = require('./config/keys');
+require('./models/User'); //  Had to change the order of the required, with the line below (did not understand, but it worked magically)
 require('./services/passport');
 
 
-// mongoose.connect(keys.mongoURI);
-mongoose.connect(keys.mongoURI, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-  });
+mongoose.connect(keys.mongoURI);
+  //   useNewUrlParser: true,
+  //   useCreateIndex: true,
+  //   useUnifiedTopology: true,
+  // });
+
 
 const app = express(); // The router will be associated with this app
+
+app.use(
+  cookieSession({
+    // How long the cookie will exist inside the browser before it expires
+    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days times 24 hours on a day times 60 minutes on a hour...
+    keys: [keys.cookieKey]
+  })
+);
+
+// Episode 47 to finish the authentication flow in the whole app
+app.use(passport.initialize());
+app.use(passport.session());
 
 // It could be like this:
 // authRoute = require('./routes/authRoutes')
