@@ -23,7 +23,8 @@ passport.deserializeUser((id, done) => {
 passport.use(new GoogleStrategy({
     clientID: keys.googleClientID,
     clientSecret: keys.googleClientSecret,
-    callbackURL: '/auth/google/callback' // route when the user grants permission
+    callbackURL: '/auth/google/callback', // route when the user grants permission
+    proxy: true
         }, 
     (accessToken, refreshToken, profile, done) => { // Error function
         // After the user select the google account, this will send a token 
