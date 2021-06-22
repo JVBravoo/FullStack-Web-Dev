@@ -2,6 +2,11 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
+  "proxy":{
+    "/auth/google": {
+      "target": "http://localhost:5000"
+    }
+  },
   "main": "index.js",
   "engines": {
     "node": "8.1.1",
