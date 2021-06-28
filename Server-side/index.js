@@ -61,3 +61,11 @@ const PORT = process.env.PORT || 5000; // If the app is running on production (H
 // http://localhost:5000/
 app.listen(PORT);
 // Not the last line anymore
+
+
+
+
+// ERROR: 
+// In the end of section 06, I had an error, "MongoNetworkError: failed to connect to server"
+
+// For some reason my cluster was not connecting to the application
