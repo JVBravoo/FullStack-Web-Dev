@@ -1,6 +1,9 @@
-import React from 'React';
-import { BrowserRouter, Route } from 'react-router-dom'; // Contains a set of react routers and helpers specifically 
-                                    // around environment that uses the browsers DOM.
+import React, { Component } from "React";
+import { BrowserRouter, Route } from "react-router-dom"; // Contains a set of react routers and helpers specifically
+import { connect } from "react-redux";
+import * as actions from "../actions";
+import SurveyNew from "./SurveyNew";
+// around environment that uses the browsers DOM.
 
 // BrowserRouter: Looks at the current URL and changes the set of components that are visible on the screen at any given time.
 // Route: is a react component that is used to setup a rule between a certain route that a user might visit of an application
@@ -8,24 +11,30 @@ import { BrowserRouter, Route } from 'react-router-dom'; // Contains a set of re
 
 // this file is responsible for all the initial view layer setup
 
-const Header = () => <h2>Header</h2>
-const Dashboard = () => <h2>Dashboard</h2>
-const SurveyNew = () => <h2>SurveyNew</h2>
-const Landing = () => <h2>Landing</h2>
+import Header from "./Header";
+import Dashboard from "./Dashboard";
+const SurveyNew = () => <h1>SurveyNew</h1>;
+import Landing from "./Landing";
 
-const App = () => { 
+class App extends Component {
+  componentDidMount() {
+    this.props.fetchUser();
+  }
+
+  render() {
     return (
-        <div>
-            <BrowserRouter>
-            <div>
-                <Header />
-                <Route exact path="/" component={Landing} />
-                <Route exact path="/surveys" component={Dashboard} />
-                <Route path="/surveys/new" component={SurveyNew} />
-            </div>
-            </BrowserRouter>
-        </div>
+      <div className="container">
+        <BrowserRouter>
+          <div>
+            <Header />
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/surveys" component={Dashboard} />
+            <Route path="/surveys/new" component={SurveyNew} />
+          </div>
+        </BrowserRouter>
+      </div>
     );
-};
+  }
+}
 
-export default App;
+export default connect(null, actions)(App);
